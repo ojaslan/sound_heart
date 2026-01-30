@@ -1,0 +1,11 @@
+streamlit
+torch
+torchaudio
+transformers
+accelerate
+librosa
+soundfile
+numpy
+scipy
+plotly
+Pillow
