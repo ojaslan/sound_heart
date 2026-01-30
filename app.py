@@ -10,6 +10,41 @@ from audio_processor import AudioProcessor
 from model_handler import QwenAudioChatbot
 from chat_manager import ChatManager
 
+
+
+def load_model():
+    """Load the Qwen Audio model"""
+    try:
+        # Create progress indicators
+        progress_bar = st.progress(0)
+        status_text = st.empty()
+        
+        status_text.text("📥 Downloading model files... (This happens once)")
+        progress_bar.progress(10)
+        
+        status_text.text("🔄 Loading processor...")
+        progress_bar.progress(30)
+        
+        # Load model
+        success = st.session_state.chatbot.load_model()
+        
+        progress_bar.progress(100)
+        status_text.text("✅ Model loaded successfully!")
+        
+        st.session_state.model_loaded = True
+        
+        # Clear progress indicators
+        time.sleep(1)
+        progress_bar.empty()
+        status_text.empty()
+        
+        return True
+        
+    except Exception as e:
+        st.error(f"❌ Error loading model: {str(e)}")
+        st.error(f"Details: {traceback.format_exc()}")
+        return False
+
 # Page configuration
 st.set_page_config(
     page_title=config.ui.page_title,
