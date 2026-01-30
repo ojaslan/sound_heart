@@ -5,10 +5,12 @@ from typing import List
 @dataclass
 class ModelConfig:
     """Qwen2-Audio Model Configuration"""
-    # Use the correct model name
-    name: str = "Qwen/Qwen2-Audio-7B-Instruct"  # or "Qwen/Qwen2-Audio-7B"
+    # Use smaller model for Streamlit Cloud
+    name: str = "Qwen/Qwen2-Audio-7B-Instruct"  # This is loading but will be slow
+    # Consider using quantized version or smaller model
     trust_remote_code: bool = True
-    device_map: str = "auto"
+    device_map: str = "cpu"  # Streamlit Cloud doesn't have GPU
+    torch_dtype: str = "float32"  # Use float32 for CPU
 
 @dataclass
 class AudioConfig:
